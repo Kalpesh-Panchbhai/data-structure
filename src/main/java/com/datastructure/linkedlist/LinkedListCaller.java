@@ -5,7 +5,5 @@ public class LinkedListCaller {
     LinkedListImp<Integer> linkedListImp = new LinkedListImp<>();
     linkedListImp.addLast(2);
     linkedListImp.addLast(3);
-    linkedListImp
-        .forEach(System.out::println);
   }
 }
