@@ -2,8 +2,10 @@ package com.datastructure.linkedlist;
 
 public class LinkedListCaller {
   public static void main(String[] args) {
-    LinkedListImp<Integer> linkedListImp = new LinkedListImp<>();
-    linkedListImp.addLast(2);
-    linkedListImp.addLast(3);
+    SinglyLinkedList<Integer> linkedListImp = new SinglyLinkedList<>();
+    linkedListImp.addFirst(2);
+    linkedListImp.addFirst(3);
+    linkedListImp.addFirst(4);
+    linkedListImp.add(2);
   }
 }
