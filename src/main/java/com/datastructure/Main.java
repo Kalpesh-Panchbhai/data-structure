@@ -8,6 +8,7 @@ public class Main {
     singlyLinkedList.add(2);
     singlyLinkedList.add(3);
     singlyLinkedList.add(4);
+    System.out.println(singlyLinkedList.remove(3));
     singlyLinkedList.traverse();
 
   }

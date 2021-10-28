@@ -38,13 +38,13 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E> {
   }
 
 
-  private void linkAtPosition(int position, E e) {
-    if (position == 0) {
+  private void linkAtPosition(int index, E e) {
+    if (index == 0) {
       linkFirst(e);
     } else {
       Node<E> newNode = new Node<>(e, null);
       Node<E> h = head;
-      for (int i = 1; i < position; i++) {
+      for (int i = 1; i < index; i++) {
         h = h.next;
       }
       newNode.next = h.next;
@@ -87,6 +87,18 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E> {
     return item;
   }
 
+  private E unlink(int index) {
+    Node<E> h = head;
+    for (int i = 1; i < index; i++) {
+      h = h.next;
+    }
+    E item = h.next.item;
+    h.next = h.next.next;
+    size--;
+    modCount++;
+    return item;
+  }
+
   public void addFirst(E e) {
     linkFirst(e);
   }
@@ -110,6 +122,12 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E> {
     }
   }
 
+  private void checkElementIndex(int index) {
+    if (!(index >= 0 && index < size)) {
+      throw new IndexOutOfBoundsException();
+    }
+  }
+
   private void checkPositionIndex(int index) {
     if (!(index >= 0 && index <= size)) {
       throw new IndexOutOfBoundsException();
@@ -122,6 +140,22 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E> {
 
   public E removeLast() {
     return unlinkLast();
+  }
+
+  public E remove() {
+    return unlinkLast();
+  }
+
+  public E remove(int index) {
+    checkPositionIndex(index);
+
+    if (index == size - 1) {
+      return unlinkLast();
+    } else if (index == 0) {
+      return unlinkFirst();
+    } else {
+      return unlink(index);
+    }
   }
 
   @Override
