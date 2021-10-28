@@ -1,169 +1,11 @@
 package com.datastructure;
 
-import java.util.AbstractSequentialList;
-import java.util.ListIterator;
-import java.util.NoSuchElementException;
-
-public class SinglyLinkedList<E> extends AbstractSequentialList<E> {
+public class SinglyLinkedList<E> {
 
   transient int size = 0;
 
   transient Node<E> head;
 
-  @Override
-  public ListIterator<E> listIterator(int index) {
-    return null;
-  }
-
-  private void linkLast(E e) {
-    Node<E> newNode = new Node<>(e, null);
-    if (head == null) {
-      head = newNode;
-    } else {
-      Node<E> h = head;
-      while (h.next != null) {
-        h = h.next;
-      }
-      h.next = newNode;
-    }
-    size++;
-    modCount++;
-  }
-
-  private void linkFirst(E e) {
-    Node<E> newNode = new Node<>(e, head);
-    head = newNode;
-    size++;
-    modCount++;
-  }
-
-
-  private void linkAtPosition(int index, E e) {
-    if (index == 0) {
-      linkFirst(e);
-    } else {
-      Node<E> newNode = new Node<>(e, null);
-      Node<E> h = head;
-      for (int i = 1; i < index; i++) {
-        h = h.next;
-      }
-      newNode.next = h.next;
-      h.next = newNode;
-      size++;
-      modCount++;
-    }
-  }
-
-  private E unlinkFirst() {
-    if (head == null) {
-      throw new NoSuchElementException();
-    }
-    Node<E> h = head;
-    head = head.next;
-    h.next = null;
-    size--;
-    modCount++;
-    return h.item;
-  }
-
-  private E unlinkLast() {
-    Node<E> h = head;
-    E item = null;
-    if (h == null) {
-      throw new NoSuchElementException();
-    }
-    if (head.next == null) {
-      item = head.item;
-      head = null;
-    } else {
-      while (h.next.next != null) {
-        h = h.next;
-      }
-      item = h.next.item;
-      h.next = null;
-    }
-    size--;
-    modCount++;
-    return item;
-  }
-
-  private E unlink(int index) {
-    Node<E> h = head;
-    for (int i = 1; i < index; i++) {
-      h = h.next;
-    }
-    E item = h.next.item;
-    h.next = h.next.next;
-    size--;
-    modCount++;
-    return item;
-  }
-
-  public void addFirst(E e) {
-    linkFirst(e);
-  }
-
-  public void addLast(E e) {
-    linkLast(e);
-  }
-
-  public boolean add(E e) {
-    linkLast(e);
-    return true;
-  }
-
-  public void add(int index, E e) {
-    checkPositionIndex(index);
-
-    if (index == size) {
-      addLast(e);
-    } else {
-      linkAtPosition(index, e);
-    }
-  }
-
-  private void checkElementIndex(int index) {
-    if (!(index >= 0 && index < size)) {
-      throw new IndexOutOfBoundsException();
-    }
-  }
-
-  private void checkPositionIndex(int index) {
-    if (!(index >= 0 && index <= size)) {
-      throw new IndexOutOfBoundsException();
-    }
-  }
-
-  public E removeFirst() {
-    return unlinkFirst();
-  }
-
-  public E removeLast() {
-    return unlinkLast();
-  }
-
-  public E remove() {
-    return unlinkLast();
-  }
-
-  public E remove(int index) {
-    checkPositionIndex(index);
-
-    if (index == size - 1) {
-      return unlinkLast();
-    } else if (index == 0) {
-      return unlinkFirst();
-    } else {
-      return unlink(index);
-    }
-  }
-
-  @Override
-  public int size() {
-    return size;
-  }
-
-  @Override
   public Object[] toArray() {
     Object[] result = new Object[size];
     int i = 0;
@@ -171,14 +13,6 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E> {
       result[i++] = x.item;
     }
     return result;
-  }
-
-  public void traverse() {
-    Node<E> h = head;
-    while (h != null) {
-      System.out.println(h.item);
-      h = h.next;
-    }
   }
 
   private static class Node<E> {
