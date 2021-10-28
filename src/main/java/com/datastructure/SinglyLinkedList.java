@@ -1,13 +1,10 @@
 package com.datastructure;
 
 import java.util.AbstractSequentialList;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.List;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
-public class SinglyLinkedList<E> extends AbstractSequentialList<E>
-    implements List<E>, Deque<E>, Cloneable, java.io.Serializable {
+public class SinglyLinkedList<E> extends AbstractSequentialList<E> {
 
   transient int size = 0;
 
@@ -19,27 +16,88 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E>
   }
 
   private void linkLast(E e) {
+    Node<E> newNode = new Node<>(e, null);
+    if (head == null) {
+      head = newNode;
+    } else {
+      Node<E> h = head;
+      while (h.next != null) {
+        h = h.next;
+      }
+      h.next = newNode;
+    }
+    size++;
+    modCount++;
   }
 
   private void linkFirst(E e) {
+    Node<E> newNode = new Node<>(e, head);
+    head = newNode;
+    size++;
+    modCount++;
   }
 
 
   private void linkAtPosition(int position, E e) {
+    if (position == 0) {
+      linkFirst(e);
+    } else {
+      Node<E> newNode = new Node<>(e, null);
+      Node<E> h = head;
+      for (int i = 1; i < position; i++) {
+        h = h.next;
+      }
+      newNode.next = h.next;
+      h.next = newNode;
+      size++;
+      modCount++;
+    }
   }
 
   private E unlinkFirst() {
-    return null;
+    if (head == null) {
+      throw new NoSuchElementException();
+    }
+    Node<E> h = head;
+    head = head.next;
+    h.next = null;
+    size--;
+    modCount++;
+    return h.item;
   }
 
-  @Override
+  private E unlinkLast() {
+    Node<E> h = head;
+    E item = null;
+    if (h == null) {
+      throw new NoSuchElementException();
+    }
+    if (head.next == null) {
+      item = head.item;
+      head = null;
+    } else {
+      while (h.next.next != null) {
+        h = h.next;
+      }
+      item = h.next.item;
+      h.next = null;
+    }
+    size--;
+    modCount++;
+    return item;
+  }
+
   public void addFirst(E e) {
     linkFirst(e);
   }
 
-  @Override
   public void addLast(E e) {
     linkLast(e);
+  }
+
+  public boolean add(E e) {
+    linkLast(e);
+    return true;
   }
 
   public void add(int index, E e) {
@@ -58,111 +116,17 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E>
     }
   }
 
-  @Override
-  public boolean offerFirst(E e) {
-    linkFirst(e);
-    return true;
-  }
-
-  @Override
-  public boolean offerLast(E e) {
-    linkLast(e);
-    return true;
-  }
-
-  @Override
   public E removeFirst() {
     return unlinkFirst();
   }
 
-  @Override
   public E removeLast() {
-    return null;
-  }
-
-  @Override
-  public E pollFirst() {
-    return null;
-  }
-
-  @Override
-  public E pollLast() {
-    return null;
-  }
-
-  @Override
-  public E getFirst() {
-    return null;
-  }
-
-  @Override
-  public E getLast() {
-    return null;
-  }
-
-  @Override
-  public E peekFirst() {
-    return null;
-  }
-
-  @Override
-  public E peekLast() {
-    return null;
-  }
-
-  @Override
-  public boolean removeFirstOccurrence(Object o) {
-    return false;
-  }
-
-  @Override
-  public boolean removeLastOccurrence(Object o) {
-    return false;
-  }
-
-  @Override
-  public boolean offer(E e) {
-    return false;
-  }
-
-  @Override
-  public E remove() {
-    return null;
-  }
-
-  @Override
-  public E poll() {
-    return null;
-  }
-
-  @Override
-  public E element() {
-    return null;
-  }
-
-  @Override
-  public E peek() {
-    return null;
-  }
-
-  @Override
-  public void push(E e) {
-    addLast(e);
-  }
-
-  @Override
-  public E pop() {
-    return null;
+    return unlinkLast();
   }
 
   @Override
   public int size() {
     return size;
-  }
-
-  @Override
-  public Iterator<E> descendingIterator() {
-    return null;
   }
 
   @Override
@@ -173,6 +137,14 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E>
       result[i++] = x.item;
     }
     return result;
+  }
+
+  public void traverse() {
+    Node<E> h = head;
+    while (h != null) {
+      System.out.println(h.item);
+      h = h.next;
+    }
   }
 
   private static class Node<E> {
