@@ -1,4 +1,4 @@
-package com.datastructure.linkedlist;
+package com.datastructure;
 
 import java.util.AbstractSequentialList;
 import java.util.Deque;
@@ -19,27 +19,17 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E>
   }
 
   private void linkLast(E e) {
-    Node<E> newNode = new Node<>(e, null);
-    if (head == null) {
-      head = newNode;
-      size++;
-      return;
-    }
-    Node<E> h = head;
-    while (h.next != null) {
-      h = h.next;
-    }
-    h.next = newNode;
-    size++;
-    modCount++;
   }
 
   private void linkFirst(E e) {
-    Node<E> newNode = new Node<>(e, null);
-    newNode.next = head;
-    head = newNode;
-    size++;
-    modCount++;
+  }
+
+
+  private void linkAtPosition(int position, E e) {
+  }
+
+  private E unlinkFirst() {
+    return null;
   }
 
   @Override
@@ -52,19 +42,37 @@ public class SinglyLinkedList<E> extends AbstractSequentialList<E>
     linkLast(e);
   }
 
+  public void add(int index, E e) {
+    checkPositionIndex(index);
+
+    if (index == size) {
+      addLast(e);
+    } else {
+      linkAtPosition(index, e);
+    }
+  }
+
+  private void checkPositionIndex(int index) {
+    if (!(index >= 0 && index <= size)) {
+      throw new IndexOutOfBoundsException();
+    }
+  }
+
   @Override
   public boolean offerFirst(E e) {
-    return false;
+    linkFirst(e);
+    return true;
   }
 
   @Override
   public boolean offerLast(E e) {
-    return false;
+    linkLast(e);
+    return true;
   }
 
   @Override
   public E removeFirst() {
-    return null;
+    return unlinkFirst();
   }
 
   @Override

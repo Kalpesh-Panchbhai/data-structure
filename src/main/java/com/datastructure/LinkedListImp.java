@@ -1,4 +1,4 @@
-package com.datastructure.linkedlist;
+package com.datastructure;
 
 import java.util.AbstractSequentialList;
 import java.util.Deque;
