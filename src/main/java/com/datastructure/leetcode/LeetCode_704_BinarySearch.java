@@ -1,16 +1,16 @@
-package com.datastructure;
+package com.datastructure.leetcode;
 
-public class LeetCode_35_SearchInsert {
+public class LeetCode_704_BinarySearch {
 
     public static void main(String[] args) {
-        System.out.println(searchInsert(new int[]{1, 3, 5, 6}, 0));
+        System.out.println(search(new int[]{5}, 5));
     }
 
-    public static int searchInsert(int[] nums, int target) {
+    public static int search(int[] nums, int target) {
         int start = 0;
         int end = nums.length - 1;
-        int mid = (start + end) / 2;
         while (start <= end) {
+            int mid = (start + end) / 2;
             if (nums[mid] == target) {
                 return mid;
             } else {
@@ -19,9 +19,8 @@ public class LeetCode_35_SearchInsert {
                 } else {
                     start = mid + 1;
                 }
-                mid = (start + end) / 2;
             }
         }
-        return start;
+        return -1;
     }
 }

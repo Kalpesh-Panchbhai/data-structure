@@ -1,4 +1,4 @@
-package com.datastructure;
+package com.datastructure.leetcode;
 
 public class LeetCode_278_FirstBadVersion {
 
