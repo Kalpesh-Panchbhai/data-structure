@@ -3,7 +3,7 @@ package com.datastructure.leetcode;
 public class LeetCode_1209_RemoveDuplicates {
 
     public static void main(String[] args) {
-        System.out.println(removeDuplicates("pbbcggttciiippooaais", 2));
+        System.out.println(removeDuplicates("deeedbbcccbdaa", 3));
     }
 
     public static String removeDuplicates(String s, int k) {
