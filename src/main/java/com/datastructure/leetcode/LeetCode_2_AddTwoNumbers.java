@@ -1,28 +1,6 @@
 package com.datastructure.leetcode;
 
-class ListNode {
-    int val;
-    ListNode next;
-
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
-    }
-
-    @Override
-    public String toString() {
-        return "" + val +
-                next;
-    }
-}
-
+//https://leetcode.com/problems/add-two-numbers/
 public class LeetCode_2_AddTwoNumbers {
 
     public static void main(String[] args) {
@@ -54,5 +32,28 @@ public class LeetCode_2_AddTwoNumbers {
             prev.next = new ListNode(carry);
         }
         return head.next;
+    }
+}
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode() {
+    }
+
+    ListNode(int val) {
+        this.val = val;
+    }
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+
+    @Override
+    public String toString() {
+        return "" + val +
+                next;
     }
 }

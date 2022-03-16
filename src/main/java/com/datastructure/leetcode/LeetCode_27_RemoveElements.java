@@ -1,5 +1,6 @@
 package com.datastructure.leetcode;
 
+//https://leetcode.com/problems/remove-element/
 public class LeetCode_27_RemoveElements {
 
     public static void main(String[] args) {

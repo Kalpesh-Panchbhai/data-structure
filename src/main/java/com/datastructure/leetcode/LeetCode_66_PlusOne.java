@@ -1,5 +1,6 @@
 package com.datastructure.leetcode;
 
+//https://leetcode.com/problems/plus-one/
 public class LeetCode_66_PlusOne {
 
     public static void main(String[] args) {

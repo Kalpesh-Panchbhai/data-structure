@@ -1,5 +1,6 @@
 package com.datastructure.leetcode;
 
+//https://leetcode.com/problems/power-of-two/
 public class LeetCode_231_PowerOfTwo {
 
     public static void main(String[] args) {
