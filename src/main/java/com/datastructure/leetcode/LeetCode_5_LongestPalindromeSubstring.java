@@ -3,7 +3,12 @@ package com.datastructure.leetcode;
 //https://leetcode.com/problems/longest-palindromic-substring/
 public class LeetCode_5_LongestPalindromeSubstring {
 
-    private int longestPalindrome(char[] str, int left, int[] pos) {
+    public static void main(String[] args) {
+        System.out.println(longestPalindrome("babad"));
+        System.out.println(longestPalindrome("cbbd"));
+    }
+
+    private static int longestPalindrome(char[] str, int left, int[] pos) {
         int right = left--, n = str.length;
         while (right < n - 1 && str[right] == str[right + 1])
             right++;
@@ -20,7 +25,7 @@ public class LeetCode_5_LongestPalindromeSubstring {
         return next;
     }
 
-    public String longestPalindrome(String s) {
+    public static String longestPalindrome(String s) {
         if (s == null || s.length() == 1) return s;
         char[] strArray = s.toCharArray();
         int[] pos = {0, 0};

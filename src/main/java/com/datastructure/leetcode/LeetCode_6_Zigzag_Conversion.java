@@ -3,8 +3,13 @@ package com.datastructure.leetcode;
 //https://leetcode.com/problems/zigzag-conversion/
 public class LeetCode_6_Zigzag_Conversion {
 
-    public String convert(String s, int numRows) {
+    public static void main(String[] args) {
+        System.out.println(convert("PAYPALISHIRING", 3));
+        System.out.println(convert("PAYPALISHIRING", 4));
+        System.out.println(convert("A", 1));
+    }
 
+    public static String convert(String s, int numRows) {
         if (numRows == 1)
             return s;
 
